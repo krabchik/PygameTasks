@@ -1,0 +1,47 @@
+import pygame
+
+
+class Ball:
+    def __init__(self, pos):
+        self.v = [-5, -5]
+        self.pos = list(pos)
+        self.otskokx = False
+        self.otskoky = False
+
+    def update(self, ):
+        pygame.draw.circle(screen, pygame.Color('white'), self.pos, 10)
+        vx, vy = self.v
+        x, y = self.pos
+        if not self.otskokx:
+            if x <= 10 or x >= 490:
+                self.v[0] = -vx
+                self.otskokx = True
+        if 10 < x < 490:
+            self.otskokx = False
+        if not self.otskoky:
+            if y <= 10 or y >= 490:
+                self.v[1] = -vy
+                self.otskoky = True
+        if 10 < y < 490:
+            self.otskoky = False
+        self.pos[0] += vx
+        self.pos[1] += vy
+
+
+pygame.init()
+screen = pygame.display.set_mode((500, 500))
+running = True
+balls = []
+clock = pygame.time.Clock()
+while running:
+    clock.tick(20)
+    screen.fill((0, 0, 0))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            balls.append(Ball(event.pos))
+    for i in balls:
+        i.update()
+    pygame.display.flip()
+pygame.quit()
