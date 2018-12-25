@@ -1,5 +1,6 @@
 import pygame
 
+
 class Rect:
     def __init__(self, posit1, posit2):
         self.posit1 = posit1
@@ -20,21 +21,26 @@ otzhata = False
 rects = []
 while running:
     screen.fill((0, 0, 0))
-    for i in rects:
-        pygame.draw.rect(screen, pygame.Color('white'), pygame.Rect(i.get_coords(), i.get_size()))
+    keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             down = True
             pos1 = event.pos
-            pos2 = tuple([int(i) for i in pos1])
+            pos2 = pos1
         if event.type == pygame.MOUSEBUTTONUP:
             otzhata = True
         if event.type == pygame.MOUSEMOTION:
             pos2 = event.pos
+        if event.type == pygame.KEYDOWN:
+            if 1 in [keys[305], keys[306]] and event.key == pygame.K_z:
+                if rects:
+                    rects.pop()
+    for i in rects:
+        pygame.draw.rect(screen, pygame.Color('white'), pygame.Rect(i.get_coords(), i.get_size()), 2)
     if down:
-        pygame.draw.rect(screen, pygame.Color('white'), pygame.Rect(*pos1, pos2[0] - pos1[0], pos2[1] - pos1[1]))
+        pygame.draw.rect(screen, pygame.Color('white'), pygame.Rect(*pos1, pos2[0] - pos1[0], pos2[1] - pos1[1]), 2)
     if otzhata:
         otzhata = False
         down = False
