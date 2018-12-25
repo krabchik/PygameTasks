@@ -16,8 +16,8 @@ while running:
             r = 1
             screen.fill((0, 0, 255))
     if draw:
-        pygame.draw.circle(screen, pygame.Color('yellow'), position, r)
-        r += 1
-    clock.tick(10)
+        pygame.draw.circle(screen, pygame.Color('yellow'), position, int(r))
+        r += 2
+    clock.tick(50)
     pygame.display.flip()
 pygame.quit()
