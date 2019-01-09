@@ -21,7 +21,6 @@ otzhata = False
 rects = []
 while running:
     screen.fill((0, 0, 0))
-    keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -34,7 +33,7 @@ while running:
         if event.type == pygame.MOUSEMOTION:
             pos2 = event.pos
         if event.type == pygame.KEYDOWN:
-            if 1 in [keys[305], keys[306]] and event.key == pygame.K_z:
+            if event.mod == 64 and event.key == pygame.K_z:
                 if rects:
                     rects.pop()
     for i in rects:
